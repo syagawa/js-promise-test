@@ -1,44 +1,38 @@
 
-const counter = {
-  suc: 0,
-  err: 0,
-  ran: 0
-}
-
-const returnSuccess = function(){
-  console.log("in returnSuccess", ++counter.suc);
+const returnSuccess = function(v){
+  console.log("in returnSuccess", v);
   return new Promise(function(resolve, reject){
     setTimeout(
       function(){
-        return resolve("returnSuccess success");
+        return resolve(++v);
       },
       500
     );
   });
 };
 
-const returnError = function(){
-  console.log("in returnError", ++counter.err);
+const returnError = function(v){
+  console.log("in returnError", v);
   return new Promise(function(resolve, reject){
     setTimeout(
       function(){
-        return reject("returnError error");
+        return reject(++v);
       },
       500
     );
   });
 };
 
-const returnRandom = function(){
-  console.log("in returnRandom", ++counter.ran);
+const returnRandom = function(v){
+  console.log("in returnRandom", v);
   return new Promise(function(resolve, reject){
     setTimeout(
       function(){
         const r = Math.random();
         if(r > 0.5){
-          return resolve("returnRandom success");
+          return resolve(++v);
         }else{
-          return reject("returnRandom error");
+          return reject(++v);
         }
       },
       500
@@ -48,7 +42,7 @@ const returnRandom = function(){
 
 const run = function(){
 
-  returnRandom()
+  returnRandom(0)
     .then(returnSuccess)
     .then(returnSuccess)
     .then(returnError)
